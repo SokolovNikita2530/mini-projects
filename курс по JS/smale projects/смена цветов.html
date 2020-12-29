@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="shortcut icon" href="images/COLORS.ICO.png" type="image/png">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Colors changer</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+
+		for (let i = 0; i < 15; i++) {
+			color = genColor();
+			let div = document.createElement('div');
+			let par = document.createElement('p');
+			par.textContent = color;
+			div.style.background = color;
+			div.style.height = '40px';
+			div.style.margin = '0';
+			div.style.overflow = 'hidden';
+			div.append(par);
+			document.body.append(div);
+		}
+
+		function genColor() {
+			let symbols, color;
+			symbols = '0123456798ABCDEF';
+			color = "#";
+			for (let i = 0; i < 6; i++) {
+				color += symbols[Math.floor(Math.random() * symbols.length)]
+			}
+			return color;
+		}
+
+		let btn = document.createElement('button');
+		btn.textContent = "ПОМЕНЯТЬ ЦВЕТ";
+		let span = document.createElement('span');
+		document.body.prepend(btn);
+		btn.setAttribute('onclick', 'onk()');
+		document.body.style = "margin: 0; text-align: center;"
+		btn.style = 'margin-bottom: 20px; padding: 10px 0px; display: block; width: 100%;';
+		function onk() {
+			for (let i = 0; i < 15; i++) {
+				let div1 = document.getElementsByTagName('div')[i];
+				color = genColor();
+				div1.style.background = color;
+				let par1 = document.getElementsByTagName('p')[i];
+				par1.textContent = color;
+			}
+		}
+
+	</script>
+</body>
+</html>

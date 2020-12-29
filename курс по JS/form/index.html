@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="shortcut icon" href="ICO.png" type="image/png">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=2.0">
+	<title>Document</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0 auto;
+			height: 100vh;
+			width: 100vw;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family: Verdana;
+		}
+
+		.form-container {
+			width: 50%;
+			height: auto;
+		}
+
+		.name, .email {
+			width: 49%;
+			height: 40px;
+			padding: 10px;
+			font-size: 20px;
+			color: #333;
+		}
+
+		.email {
+			float: right;
+			margin-left: auto;
+			margin-right: 0;
+		}
+
+		textarea {
+			margin-top: 10px;
+			max-width: 100%;
+			min-width: 100%;
+			max-height: 300px;
+			min-height: 300px;
+			padding: 10px;
+			font-size: 20px;
+			font-family: Verdana;
+			color: #333;
+		}
+
+		.submit {
+			margin-top: 5px;
+			display: block;
+			width: 150px;
+			padding: 14px 0px;
+			border: 3px solid DarkBlue;
+			border-radius: 2px;
+			background-color: DarkBlue;
+			color: #fff;
+			transition: 0.3s;
+		}
+
+		.submit:hover{
+			background-color: #FFF;
+			color: DarkBlue;
+		}
+	</style>
+</head>
+<body>
+	<div class="form-container">
+		<form id="form" action="index.html?form_api_token=835e49e8ec25280fff09da437640c01b" method="post">
+			<input type='hidden' name='redirect_to' value='index.html' />
+			<input type="text" name="name" class="input name" placeholder="Name" required>
+			<input type="email" name="email" class="input email" placeholder="E-mail" required>
+			<textarea name="text" id="" placeholder="Message"></textarea>
+			<input type="submit" class="input submit" value="SEND">
+		</form>
+	</div>
+</body>
+</html>

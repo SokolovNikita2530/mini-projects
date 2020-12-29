@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="shortcut icon" href="ICO.png" type="image/png">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>LazyLoad</title>
+	<style>
+		body {
+			padding: 150px 0px;
+			background-color: #555;
+			margin: 0 auto;
+			display: flex;
+			justify-content: center;
+			font-family: Verdana;
+		}
+
+		.menu {
+			top: 0;
+			position: fixed;
+			width: 100%;
+			height: 70px;
+			background-color: #fff;
+			z-index: 2;
+			box-shadow: 0px 1px 14px #111;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.main_container {
+			width: 70%;
+			display: flex;
+			justify-content: center;
+		}
+
+		.side-bar ul {
+			padding: 0;
+			margin: 0;
+			overflow: hidden;
+			height: 299px;
+			background-color: #fff;
+			box-shadow: 0px 6px 20px #000;
+			border-radius: 4px;
+		}
+
+		.side-bar li{
+			height: 60px;
+			display: block;
+		}
+
+		.side-bar a{
+			text-decoration: none;
+			font-weight: 1000;
+			color: #333;
+			display: block;
+			text-align: center;
+			vertical-align: middle;
+			width: 100%;
+			padding: 20px 0px;
+			transition: 0.3s;
+		}
+
+		.side-bar a:hover{
+			color: #fff;
+			background-color: #333;
+
+		}
+
+		.side-bar {
+			width: 25%;
+			background-color: #000;
+			margin-right: 5%;
+			height: 0;
+		}
+
+		.container, .side-bar {
+			display: inline-block;
+		}
+
+		.container {
+			width: 65%;
+			box-shadow: 0px 6px 20px #000;
+			text-align: justify;
+			letter-spacing: 0;
+			font-size: 1.3em;
+			background-color: #fff;
+			padding: 35px;
+			overflow-x: hidden;
+			border-radius: 4px;
+		}
+
+		img {
+			width: 100%;
+		}
+
+		.container_menu {
+			width: 70%;
+		}
+
+		.container_menu a, p {
+			display: inline-block;
+		}
+
+		.container_menu a{
+			  margin-left: auto;
+  			margin-right: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="menu">
+		<div class="container_menu">
+			<p>LOGO</p>
+		</div>
+	</div>
+	<div class="main_container">
+		<div class="side-bar">
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Servise</a></li>
+				<li><a href="#">Market</a></li>
+				<li><a href="#">Serch</a></li>
+				<li><a href="#">Support</a></li>
+			</ul>
+		</div>
+		<div class="container">
+			<h1>Lorem ipsum, dolor sit.</h1>
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing, elit. Voluptate, ex. Eligendi quidem dolorem labore iure quis enim at, quos animi accusamus, ratione dolore voluptatem neque veniam excepturi inventore tempore laudantium facilis cupiditate eum sint dolorum temporibus optio dolor a? Reprehenderit placeat libero eius sed vitae?Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero adipisci praesentium alias quo illo veniam officiis pariatur dignissimos, consequatur et blanditiis perferendis cupiditate maxime, ab! Neque et repudiandae ex reiciendis laboriosam nesciunt ipsa omnis molestias blanditiis debitis odio delectus perferendis rerum consequuntur nobis totam qui eius, a laudantium incidunt vitae hic voluptatem. Praesentium odit, explicabo voluptas, nisi ipsum esse nulla doloremque recusandae possimus hic corporis, dolore placeat numquam veritatis architecto. Repellat enim veritatis aut repellendus totam, vel voluptatibus ut unde fugit, perspiciatis atque incidunt corrupti obcaecati, architecto tenetur nam, eos explicabo odit. Veritatis rem maiores provident quis exercitationem fuga esse!</p>
+
+			<img src="img/blured_pictures/blur_1.jpg" data-src='img/1.jpg' alt="rfhnbyrf">
+
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas perspiciatis ipsam, distinctio quod sequi dolor vitae dignissimos, dolores quasi rem, neque. Quaerat quisquam expedita cum vel quam ab atque dicta ratione dolorum, labore officia possimus, id facere tempora hic, suscipit pariatur tempore, eaque! Ipsam earum modi vel doloremque recusandae repellendus sit impedit non fugiat ipsa amet veritatis alias exercitationem perspiciatis maiores, inventore perferendis facere voluptas? Officia, aperiam ipsam, illum odio dolor vel atque totam, hic minus assumenda doloremque autem dolore qui nesciunt distinctio sit aspernatur, dicta a tempora! Temporibus, reiciendis praesentium, officia esse ex porro distinctio fuga perferendis hic eius.</p>
+
+			<img src="img/blured_pictures/blur_2.jpg" data-src='img/2.jpg' alt="rfhnbyrf">
+
+			<p>Lorem ipsum dolor sit amet, consectetur, adipisicing elit. A iusto unde, dolorem, quas, rem quis rerum minima, amet quaerat earum veritatis! Eum aut eligendi explicabo numquam aspernatur sapiente laudantium obcaecati eveniet veniam repudiandae sunt, mollitia assumenda voluptatum est molestias eaque ipsam quaerat quis excepturi. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatis.</p>
+
+			<img src="img/blured_pictures/blur_3.jpg" data-src='img/3.jpg' alt="rfhnbyrf">
+
+			<p>Lorem ipsum dolor sit amet, consectetur, adipisicing elit. A iusto unde, dolorem, quas, rem quis rerum minima, amet quaerat earum veritatis! Eum aut eligendi explicabo numquam aspernatur sapiente laudantium obcaecati eveniet veniam repudiandae sunt, mollitia assumenda voluptatum est molestias eaque ipsam quaerat quis excepturi. Architecto impedit minus, ncilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatislorem30. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitatumquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatis.</p>
+
+			<img src="img/blured_pictures/blur_4.jpg" data-src='img/4.jpg' alt="rfhnbyrf">
+
+			<p>Lorem ipsum dolor sit amet, consectetur, adipisicing elit. A iusto unde, dolorem, quas, rem quis rerum minima, amet quaerat earum veritatis! Eum aut eligendi explicabo numquam aspernatur sapiente laudantium obcaecati eveniet veniam repudiandae sunt, mollitia assumenda voluptatum est molestias eaque ipsam quaerat quis excepturi. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatis.cilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatislorem30. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitatcilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatislorem30. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitat</p>
+
+			<img src="img/blured_pictures/blur_5.jpg" data-src='img/5.jpg' alt="rfhnbyrf">
+
+			<p>Lorem ipsum dolor sit amet, consectetur, adipisicing elit. A iusto unde, dolorem, quas, rem quis rerum minima, amet quaerat earum veritatis! Eum aut eligendi explicabo numquam aspernatur sapiente laudantium obcaecati eveniet veniam repudiandae sunt, mollitia assumenda voluptatum est molestias eaque ipsam quaerat quis excepturi. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatis.</p>
+
+			<img src="img/blured_pictures/blur_6.jpg" data-src='img/6.jpg' alt="rfhnbyrf">
+
+			<p>Lorem ipsum dolor sit amet, consectetur, adipisicing elit. A iusto unde, dolorem, quas, rem quis rerum minima, amet quaerat earum veritatis! Eum aut eligendi explicabo numquam aspernatur sapiente laudantium obcaecati eveniet veniam repudiandae sunt, mollitia assumenda voluptatum est molestias eaque ipsam quaerat quis excepturi. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatis.</p>
+
+			<img src="img/blured_pictures/blur_7.jpg" data-src='img/7.jpg' alt="rfhnbyrf">
+
+			<p>Lorem ipsum dolor sit amet, consectetur, adipisicing elit. A iusto unde, dolorem, quas, rem quis rerum minima, amet quaerat earum veritatis! Eum aut eligendi explicabo numquam aspernatur sapiente laudantium obcaecati eveniet veniam repudiandae sunt, mollitia assumenda voluptatum est molestias eaque ipsam quaerat quis excepturi. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatis.cilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatislorem30. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitat</p>
+
+			<img src="img/blured_pictures/blur_8.jpg" data-src='img/8.jpg' alt="rfhnbyrf">
+
+			<p>Lorem ipsum dolor sit amet, consectetur, adipisicing elit. A iusto unde, dolorem, quas, rem quis rerum minima, amet quaerat earum veritatis! Eum aut eligendi explicabo numquam aspernatur sapiente laudantium obcaecati eveniet veniam repudiandae sunt, mollitia assumenda voluptatum est molestias eaque ipsam quaerat quis excepturi. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatis.</p>
+
+			<img src="img/blured_pictures/blur_9.jpg" data-src='img/9.jpg' alt="rfhnbyrf">
+
+			<p>Lorem ipsum dolor sit amet, consectetur, adipisicing elit. A iusto unde, dolorem, quas, rem quis rerum minima, amet quaerat earum veritatis! Eum aut eligendi explicabo numquam aspernatur sapiente laudantium obcaecati eveniet veniam repudiandae sunt, mollitia assumenda voluptatum est molestias eaque ipsam quaerat quis excepturi. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatislorem30. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitatcilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatislorem30. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitat</p>
+
+			<img src="img/blured_pictures/blur_10.jpg" data-src='img/10.jpg' alt="rfhnbyrf">
+
+			<p>Lorem ipsum dolor sit amet, consectetur, adipisicing elit. A iusto unde, dolorem, quas, rem quis rerum minima, amet quaerat earum veritatis! Eum aut eligendi explicabo numquam aspernatur sapiente laudantium obcaecati eveniet veniam repudiandae sunt, mollitia assumenda voluptatum est molestias eaque ipsam quaerat quis excepturi. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatis.cilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatislorem30. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitatcilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitationem esse excepturi sequi veritatislorem30. Architecto impedit minus, numquam optio earum cumque autem praesentium quam id placeat commodi facilis iure dolor nam facere itaque assumenda tenetur exercitationem. Suscipit repellendus neque cum nihil quisquam ipsa nam provident fugiat, similique quae veritatis velit incidunt, odit dolorum vitae nesciunt, consequatur qui et libero. Laboriosam asperiores, labore sint unde aperiam exercitat</p>
+		</div>
+	</div>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			function Visible(count) {
+				let target = document.getElementsByTagName('img')[count];
+		  		let targetPosition = {
+		      		top: window.pageYOffset + target.getBoundingClientRect().top,
+		      		left: window.pageXOffset + target.getBoundingClientRect().left,
+		      		right: window.pageXOffset + target.getBoundingClientRect().right,
+		      		bottom: window.pageYOffset + target.getBoundingClientRect().bottom
+		    	},
+		    	windowPosition = {
+		      		top: window.pageYOffset,
+		      		left: window.pageXOffset,
+		      		right: window.pageXOffset + document.documentElement.clientWidth,
+		      		bottom: window.pageYOffset + document.documentElement.clientHeight
+		    	};
+		  		if (targetPosition.bottom > (windowPosition.top + 300) && targetPosition.top < (windowPosition.bottom - 300) && targetPosition.right > windowPosition.left && targetPosition.left < windowPosition.right) {
+		  			target.setAttribute('src', "img/" + (count + 1) + ".jpg");
+		  		} else {
+		  			target.setAttribute('src', "img/blured_pictures/blur_" + (count + 1) + ".jpg");
+		  		};
+			};
+
+			window.addEventListener('scroll', function() {
+				for (let i = 0; i<10; i++) {
+					Visible(i);
+				}
+			});
+
+			
+		}, false);
+
+	</script>
+</body>
+</html>

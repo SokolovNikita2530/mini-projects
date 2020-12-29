@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="images/ICO.png" type="image/png">
+	<title>Tasks</title>
+</head>
+<body>
+	<script type="text/javascript">
+		for (let i = 1; i <= 100; i++) {
+			if ((i%3) === 0 && (i%5) === 0) {
+				console.log('ТриПять');
+			} else if ((i%3) === 0) {
+				console.log('Три');
+			} else if ((i%5) === 0) {
+				console.log('Пять');
+			} else {
+				console.log(i);
+			}
+		}
+
+		function create(width, height, first, second) {
+		  	let value__1 = first || "#",
+		      	value__2 = second || " ",
+				odd = "",
+		        even = "";
+		  	for (let i = 1; i <= height; i++) {
+		    	if ((i % 2) === 0) {
+		      		for (let i = 0; i < (width/2); i += 1) {
+		        		odd += value__1 + value__2;
+		      		}
+		      		console.log(odd);
+		      		odd = "";
+		    	} else {
+		      		for (let i = 0; i < (width/2); i++) {
+		        		even += value__2 + value__1;
+		      		}	
+		      		console.log(even);
+		      		even = "";
+		    	}	
+		  }
+		}
+
+		create(30, 30, "#", "$");
+		console.clear();
+
+		let PosX = prompt("Введите координаты ладьи по оси X", 0),
+			PosY = prompt("Введите координаты ладьи по оси Y", 0),
+			MoveX = prompt("Введите куда пойдет ладья по оси X", 0),
+			MoveY = prompt("Введите куда пойдет ладья по оси Y", 0);
+
+		function rookMove(PosX, PosY, MoveX, MoveY) {
+			if (PosX === MoveX && PosY === MoveY) {
+				alert('Стоит на месте');
+			} else if (PosX === MoveX || PosY === MoveY) {
+				alert('Может');
+			} else {
+				alert('Не может');
+			}
+		}
+
+		rookMove(PosX,PosY,MoveX,MoveY)
+	</script>
+</body>
+</html>

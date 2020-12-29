@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="shortcut icon" href="ICO.png" type="image/png">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Paint | canvas</title>
+	<style>
+		/*some styles*/
+		body {margin: 0 auto;}
+		* {box-sizing: border-box;}
+		canvas {display: block;}
+	</style>
+</head>
+<body>
+	<!-- canvas -->
+	<canvas id="canvas">Canvas not supported.</canvas>
+
+	<!-- script -->
+	<script type="text/javascript">
+		//ALERT//
+		alert(`S - save, R - replay, C - clear, A - clear saved... \n Have fun! ;)`)
+
+		//variables//
+		let canv        = document.getElementById('canvas'),
+		    ctx         = canv.getContext('2d'),
+		    isMouseDown = false,
+		    coordinates = [];
+
+		//canvas size//
+		canv.width  = window.innerWidth;
+		canv.height = window.innerHeight;
+
+		//CODE//
+		canv.addEventListener('mousedown', function() {
+			isMouseDown = true;
+		});
+
+		canv.addEventListener('mouseup', function() {
+			isMouseDown = false;
+			ctx.beginPath();
+			coordinates.push('mouseup')
+		});
+
+		ctx.lineWidth = 6*2;
+
+		canv.addEventListener('mousemove', function(e) {
+			if(isMouseDown) {
+				coordinates.push([e.clientX, e.clientY]);
+
+				ctx.lineTo(e.clientX, e.clientY);
+				ctx.stroke();
+
+				ctx.beginPath();
+				ctx.arc(e.clientX, e.clientY, 6, 0, Math.PI * 2);
+				ctx.fill();
+
+				ctx.beginPath();
+				ctx.moveTo(e.clientX, e.clientY);
+			}
+		});
+
+		//save function//
+		function save() {
+			localStorage.setItem('coordinates', JSON.stringify(coordinates))
+		}
+
+		//replay function//
+		function replay() {
+			let timer = setInterval(function() {
+				if(!coordinates.length) {
+					clearInterval(timer);
+					ctx.beginPath();
+					return;
+				}
+
+				let coord = coordinates.shift(), 
+			        e     = {clientX: coord["0"],clientY: coord["1"]};
+
+				ctx.lineTo(e.clientX, e.clientY);
+				ctx.stroke();
+
+				ctx.beginPath();
+				ctx.arc(e.clientX, e.clientY, 6, 0, Math.PI * 2);
+				ctx.fill();
+
+				ctx.beginPath();
+				ctx.moveTo(e.clientX, e.clientY);
+			}, 20);
+		}
+
+		//clear function//
+		function clear() {
+			ctx.fillStyle = 'white';
+			ctx.fillRect(0, 0, canv.width, canv.height);
+
+			ctx.beginPath();
+			ctx.fillStyle = 'black';
+		}
+
+
+		//s - save, r - replay, c - clear//
+		document.addEventListener('keydown', function (e) {
+			//save//
+			if(e.keyCode === 83) {
+				save();
+				console.log('Saved');
+			}
+
+			//replay//
+			if(e.keyCode === 82) {
+				console.log('Replaying...');
+
+				coordinates = JSON.parse(localStorage.getItem('coordinates'));
+
+				clear();
+				replay();
+			}
+
+			//clear//
+			if(e.keyCode === 67) {
+				clear();
+				console.log('Cleared');
+			}
+
+			//clear localStorage//
+			if(e.keyCode === 65) {
+				localStorage.removeItem('coordinates', JSON.stringify(coordinates));
+				localStorage.setItem('coordinates', JSON.stringify(coordinates));
+				console.log('LocalStorage cleared');
+			}
+		});
+	</script>
+</body>
+</html>
