@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="shortcut icon" href="ICO.png" type="image/png">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PinPong | canvas</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+	<style>
+		/* some styles */
+		*                  {box-sizing: border-box;}
+		canvas             {background: #000; display: block; margin: 0 auto;}
+		body               {margin: 0 auto; background-color: #222;}
+		#youWin, #GameOver {overflow: hidden !important; opacity: 0; position: absolute; width: 100vw; height: 100vh; display: flex; justify-content: center; text-align: center; background-color: #222; z-index: 999; transition: .4s;}
+		h1 {font-size: 40px; line-height: calc(100vh - 40px); display: block; font-family: Verdana; color: #fff;}
+
+	</style>
+</head>
+<body>
+	<div id="youWin"><h1>YOU WIN!</h1></div>
+
+	<div id="GameOver"><h1>GAME OVER!</h1></div>
+
+	<!-- create canvas -->
+	<canvas id="canvas" width="1200" height="600">Sorry... Your brouser is not support HTML5.</canvas>
+
+	<script>
+		//window onload//
+		window.onload = function() {
+			let ask = prompt('Auto mode? Y - yes, N - no', 'N');
+			if(ask === 'Y') {
+				setInterval(renderAuto, 1000/60); //60 FPS
+			} else if(ask === 'N') {
+				setInterval(render, 1000/60); //60 FPS
+			} else {
+				setInterval(render, 1000/60); //60 FPS
+			}
+			document.addEventListener('keydown', keyDownHandler);
+			document.addEventListener('keyup', keyUpHandler);
+		}
+
+		//variables//
+		let canvas          = document.getElementById('canvas'),
+		    ctx             = canvas.getContext('2d'),
+		    rightPressed    = false,
+		    leftPressed     = false,
+		    paddleWidth     = 150,
+		    brickRowCount   = 20,
+		    brickOffsetTop  = 30, //30!//
+		    brickOffsetLeft = 10,
+		    brickPadding    = 2,
+		    brickColCount   = 20,
+		    brickWidth      = ~~(canvas.width - brickPadding * (brickColCount - 1) - brickOffsetLeft * 2) / brickColCount,
+		    brickHeight     = 15,
+		    paddleHeight    = 15,
+		    ballRadius      = 8,
+		    directionX      = StandartX = 2,
+		    paddleSpeed     = directionX * 4,
+		    positionX       = ~~(canvas.width) / 2,
+		    positionY       = canvas.height - paddleHeight - ballRadius,
+		    directionY      = StandartY = -2,
+		    score           = 0,
+		    paddlePositionY = canvas.height - paddleHeight,
+		    paddlePositionX = (~~(canvas.width) / 2) - (paddleWidth / 2),
+		    bricks          = [],
+		    lives           = 3;
+
+		//rendering//
+		function render() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			drawBall();
+			drawPaddle();
+			drawBriks();
+			collisionDetection();
+			drawScore();
+			drawLives();
+
+			//ball moving//
+			positionX += directionX;
+			positionY += directionY;
+
+			//bouncing//
+			if(positionY < ballRadius || positionY > (canvas.height - ballRadius)) {directionY = -directionY;}
+			if(positionX < ballRadius || positionX > (canvas.width - ballRadius)) {directionX = -directionX;}
+		
+			//render paddle moving | for smooth moving :D //
+			if(rightPressed) {
+				paddlePositionX += paddleSpeed;
+				if(paddlePositionX > canvas.width - paddleWidth) {paddlePositionX = canvas.width - paddleWidth}
+			}
+
+			if(leftPressed) {
+				paddlePositionX -= paddleSpeed;
+				if(paddlePositionX < 0) {paddlePositionX = 0}
+			}
+
+			//paddle colision//
+			if(paddlePositionY === positionY + ballRadius && positionX > paddlePositionX && positionX <= paddlePositionX + paddleWidth) {
+				directionY = -directionY;
+				directionX = directionX * 1.01;
+				directionY = directionY * 1.01;
+			}
+
+			//GAME OVER//
+			if(positionY > paddlePositionY) {
+				if(!lives) {
+					document.getElementById('GameOver').style.opacity = 1;
+					setTimeout(function() {document.location.reload();}, 5000);
+				}
+				lives--;
+				positionX = ~~(canvas.width) / 2;
+				positionY = canvas.height - paddleHeight - ballRadius;
+				paddlePositionY = canvas.height - paddleHeight,
+		    	paddlePositionX = (~~(canvas.width) / 2) - (paddleWidth / 2);
+		    	directionX = StandartX;
+		    	directionY = StandartY;
+			}
+		}
+
+		//rendering | autoMode//
+		function renderAuto() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			drawBall();
+			drawPaddle();
+			drawBriks();
+			collisionDetection();
+			drawScore();
+			drawLives();
+
+			positionX += directionX;
+			positionY += directionY;
+
+			paddlePositionX = positionX - paddleWidth / 2;
+
+			//bouncing//
+			if(positionY < ballRadius || positionY > (canvas.height - ballRadius)) {directionY = -directionY;}
+			if(positionX < ballRadius || positionX > (canvas.width - ballRadius)) {directionX = -directionX;}
+		
+			//render paddle moving | for smooth moving :D //
+			if(rightPressed) {
+				paddlePositionX += paddleSpeed;
+				if(paddlePositionX > canvas.width - paddleWidth) {paddlePositionX = canvas.width - paddleWidth}
+			}
+
+			if(leftPressed) {
+				paddlePositionX -= paddleSpeed;
+				if(paddlePositionX < 0) {paddlePositionX = 0}
+			}
+
+			//paddle colision//
+			if(paddlePositionY === positionY + ballRadius && positionX > paddlePositionX && positionX <= paddlePositionX + paddleWidth) {
+				directionY = -directionY;
+				directionX = directionX * 1.01;
+				directionY = directionY * 1.01;
+			}
+
+			//GAME OVER//
+			if(positionY > paddlePositionY) {
+				if(!lives) {
+					document.getElementById('GameOver').style.opacity = 1;
+					setTimeout(function() {document.location.reload();}, 5000);
+				}
+				lives--;
+				positionX = ~~(canvas.width) / 2;
+				positionY = canvas.height - paddleHeight - ballRadius;
+				paddlePositionY = canvas.height - paddleHeight,
+		    	paddlePositionX = (~~(canvas.width) / 2) - (paddleWidth / 2);
+		    	directionX = StandartX;
+		    	directionY = StandartY;
+			}
+		}
+
+		//draw ball//
+		function drawBall() {
+			ctx.fillStyle = 'red';
+			ctx.beginPath();
+			ctx.arc(positionX, positionY, ballRadius, 0, Math.PI * 2);
+			ctx.fill();
+			ctx.closePath();
+		}
+
+		//draw paddle//
+		function drawPaddle() {
+			ctx.fillStyle = 'lime';
+			ctx.beginPath();
+			ctx.fillRect(paddlePositionX, paddlePositionY, paddleWidth, paddleHeight)
+			ctx.closePath();
+		}
+
+		//draw bricks//
+		for(let i = 0; i < brickColCount; i++) {
+			bricks[i] = [];
+			for(let j = 0; j < brickRowCount; j++) {
+				bricks[i][j] = {x: 0, y: 0, status: 1};
+			}
+		}
+
+		function drawBriks() {
+			for(let i = 0; i < brickColCount; i++) {
+				for(let j = 0; j < brickRowCount; j++) {
+					if(bricks[i][j].status == 1) {
+						let brickPositionX = (i * (brickWidth + brickPadding)) + brickOffsetLeft;
+						    brickPositionY = (j * (brickHeight + brickPadding)) + brickOffsetTop;
+						bricks[i][j].x = brickPositionX;
+						bricks[i][j].y = brickPositionY;
+						ctx.fillStyle = 'DodgerBlue';
+						ctx.beginPath();
+						ctx.fillRect(brickPositionX, brickPositionY, brickWidth, brickHeight);
+						ctx.closePath();
+					}
+				}
+			}
+		}
+
+		//collision detection//
+		function collisionDetection() {
+			for(let i = 0; i < brickColCount; i++) {
+				for(let j = 0; j < brickRowCount; j++) {
+					let b = bricks[i][j];
+					if(b.status === 1) {
+						if(positionX > b.x && positionX < b.x + brickWidth && positionY + ballRadius > b.y && positionY - ballRadius < b.y + brickHeight) {
+							directionY = -directionY;
+							b.status = 0;
+							score++;
+							if(score === brickRowCount * brickColCount) {
+								document.getElementById('youWin').style.opacity = 1;
+								setTimeout(function() {document.location.reload();}, 5000);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		//paddle move//
+		function keyDownHandler(e) {
+			if(e.keyCode === 39) {rightPressed = true;}
+			if(e.keyCode === 37) {leftPressed = true;}
+		}
+
+		function keyUpHandler(e) {
+			if(e.keyCode === 39) {rightPressed = false}
+			if(e.keyCode === 37) {leftPressed = false}
+		}
+
+		//draw score//
+		function drawScore() {
+			ctx.font = "16px Arial";
+			ctx.fillStyle = "#fff";
+			ctx.fillText("Score: " + score, 8, 20);
+		}
+
+		//draw lives//
+		function drawLives() {
+			ctx.font = "16px Arial";
+			ctx.fillStyle = "#fff";
+			ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+		}
+
+	</script>
+</body>
+</html>
