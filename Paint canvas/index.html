@@ -164,6 +164,8 @@
 		input::-webkit-outer-spin-button,
 		input::-webkit-inner-spin-button {
 			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
 		}
 
 		.color-box {
@@ -411,17 +413,17 @@
 				}
 
 				let coord = coordinates.shift(), 
-			        e     = {clientX: coord["0"], clientY: coord["1"], color: coord["2"], LARWidth: coord["3"]};
+			       e     = {clientX: coord["0"], clientY: coord["1"], color: coord["2"], LARWidth: coord["3"]};
 
-			    ctx.fillStyle = e.color;
-			    ctx.lineWidth = e.LARWidth;
+			   ctx.fillStyle = e.color;
+			   ctx.lineWidth = e.LARWidth;
 				ctx.lineTo(e.clientX, e.clientY);
 				ctx.stroke();
 				ctx.strokeStyle = e.color;
 
 				if(lineAndRadWidth > 1) {
 					ctx.beginPath();
-					ctx.arc(e.clientX, e.clientY, lineAndRadWidth / 2, 0, Math.PI * 2);
+					ctx.arc(e.clientX, e.clientY, e.LARWidth / 2, 0, Math.PI * 2);
 					ctx.fill();
 				}
 
