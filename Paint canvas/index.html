@@ -1,31 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
 	<link rel="shortcut icon" href="ICO.png" type="image/png">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Paint | canvas</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<style>
 		/*some styles*/
-		body {margin: 0 auto;}
+		body {margin: 0 auto; user-select: none;}
 		* {box-sizing: border-box;}
 		canvas {display: block;}
+
+		.panel {
+			border-bottom: 1px solid #999;
+			border-left: 1px solid #999;
+
+			display: flex;
+			align-items: center;
+			position: absolute;
+			height: 90px;
+			width: 100vw;
+			background-color: #eee;
+			padding: 0px;
+		}
+
+		.tools {
+			width: 20%;
+			height: 100%;
+			border-right: 1px solid #999;
+		}
+
+		.thickness {
+			width: 20%;
+			height: 100%;
+			border-right: 1px solid #999;
+		}
+
+		.colors {
+			width: 30%;
+			height: 100%;
+			border-right: 1px solid #999;
+		}
+
+
+
+		.tools, .thickness, .colors, .buttons {
+			display: inline-block;
+		}
+
+		.select {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 80%;
+		}
+
+		.mini-icon {
+			border: 2px solid #ddd;
+			margin-right: 10px;
+			height: 40px; 
+			width: 40px;
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.mini-icon:hover {
+			border: 2px solid rgba(100,100,255,0.5);
+			background-color: rgba(100,100,255,0.1);
+		}
+
+		.selected {
+			border: 2px solid rgba(100,100,255,0.7);
+			background-color: rgba(100,100,255,0.3);
+		}
+
+		img {
+			height: 70%;
+			width: 70%;
+		}
+
+		p {
+			display: block !important;
+			color: #999;
+			text-align: center;
+			margin-top: -7px;
+			font-family: Verdana;
+			margin-bottom: 0 !important;
+		}
+
+		.thickness div input, .thickness div p {
+			display: inline-block !important;
+			line-height: 25px;
+			margin-top: 0 !important;
+			color: #555;
+		}
+
+		input {
+			outline: none;
+			text-align: right;
+			height: 25px;
+			width: 30%;
+			margin-right: 3px;
+			border: 2px solid #ddd;
+			background-color: #eee;
+		}
+
+		input:focus {
+			border: 2px solid rgba(100,100,255,0.5);
+			background-color: rgba(100,100,255,0.1);
+		}
+
+		.thickness div {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 80%;
+			width: 100%;
+		}
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+		}
+
+		.color-box {
+			height: 80%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.main__color {
+			height: 45px;
+			width: 45px;
+			border: 2px solid #ddd;
+			margin-right: 10px;
+		}
+
+		.main__colors {
+			height: 20px;
+			margin-bottom: 5px;
+		}
+
+		.main__colors div {
+			height: 20px;
+			width: 20px;
+			display: inline-block;
+			border: 2px solid #ddd;
+		}
+
+		.main__colors div:hover {
+			border-color: rgba(100,100,255,1);
+		}
+
+		.buttons {
+			height: 100%;
+			width: 30%;
+		}
+
+		.main_buttons {
+			display: flex;
+			width: 100%;
+			justify-content: center;
+			align-items: center;
+			height: 30px;
+		}
+
+		.main_buttons button {
+			outline: none;
+			height: 30px;
+			text-transform: uppercase;
+			border: none;
+			width: 50%;
+			display: inline-block;
+			border-right: 1px solid #999;
+			color: #555;
+		}
+		
+		.download button{
+			outline: none;
+			height: 30px !important;
+			border-top: 1px solid #999 !important;
+			border-right: 1px solid #999 !important;
+			border-bottom: 1px solid #999 !important;
+			text-transform: uppercase;
+			border: none;
+			width: 100% !important;
+			color: #555;
+		}
+
+		a {
+			color: #555 !important;
+		}
 	</style>
 </head>
 <body>
+	<!-- panel -->
+	<div class='panel'>
+		<div class="tools">
+			<div class="select">
+				<div id="eraser" class='mini-icon' onclick="changeEraser()"><img src="images/clear.png" alt=""></div>
+				<div id="pan" class='mini-icon selected' style="margin: 0;" onclick="changePan()"><img src="images/pan.png" alt=""></div>
+			</div>
+			<p>Tools</p>
+		</div>
+		<div class="thickness">
+			<div><input id="widthLine" type="number" value="2"><p>px</p></div>
+			<p>Thickness</p>
+		</div>
+		<div class="colors">
+			<div class="color-box">
+				<div class="main__color"></div>
+				<div class="colors__container">
+					<div class="main__colors">
+						<div class="color__cell" style="background-color: black;" onclick="changeColor(0)"></div>
+						<div class="color__cell" style="background-color: gray;" onclick="changeColor(1)"></div>
+						<div class="color__cell" style="background-color: darkred;" onclick="changeColor(2)"></div>
+						<div class="color__cell" style="background-color: red;" onclick="changeColor(3)"></div>
+						<div class="color__cell" style="background-color: orange;" onclick="changeColor(4)"></div>
+						<div class="color__cell" style="background-color: yellow;" onclick="changeColor(5)"></div>
+						<div class="color__cell" style="background-color: green;" onclick="changeColor(6)"></div>
+						<div class="color__cell" style="background-color: dodgerblue;" onclick="changeColor(7)"></div>
+						<div class="color__cell" style="background-color: darkblue;" onclick="changeColor(8)"></div>
+						<div class="color__cell" style="background-color: indigo;" onclick="changeColor(9)"></div>
+					</div>
+					<div class="main__colors" style="margin-bottom: 0;">
+						<div class="color__cell" style="background-color: white;" onclick="changeColor(10)"></div>
+						<div class="color__cell" style="background-color: silver;" onclick="changeColor(11)"></div>
+						<div class="color__cell" style="background-color: brown;" onclick="changeColor(12)"></div>
+						<div class="color__cell" style="background-color: violet;" onclick="changeColor(13)"></div>
+						<div class="color__cell" style="background-color: gold;" onclick="changeColor(14)"></div>
+						<div class="color__cell" style="background-color: lightyellow;" onclick="changeColor(15)"></div>
+						<div class="color__cell" style="background-color: lime;" onclick="changeColor(16)"></div>
+						<div class="color__cell" style="background-color: skyblue;" onclick="changeColor(17)"></div>
+						<div class="color__cell" style="background-color: steelblue;" onclick="changeColor(18)"></div>
+						<div class="color__cell" style="background-color: purple;" onclick="changeColor(19)"></div>
+					</div>
+				</div>
+			</div>
+			<p>Colors</p>
+		</div>
+		<div class="buttons">
+			<div class="main_buttons"><button id="clear">clear</button><button id="clearAll">clear saved</button></div>
+			<div class="main_buttons" style="border-top: 1px solid #999;"><button id="save">save</button><button id="replay">replay</button></div>
+			<div class="download"><button><a id="download" download="canvas.png">download picture</a></button></div>
+		</div>
+	</div>
+
 	<!-- canvas -->
 	<canvas id="canvas">Canvas not supported.</canvas>
 
 	<!-- script -->
 	<script type="text/javascript">
 		//ALERT//
-		alert(`S - save, R - replay, C - clear, A - clear saved... \n Have fun! ;)`)
+		//alert(`S - save, R - replay, C - clear, A - clear saved... \n Have fun! ;)`)
 
 		//variables//
-		let canv        = document.getElementById('canvas'),
-		    ctx         = canv.getContext('2d'),
-		    isMouseDown = false,
-		    coordinates = [];
+		let canv            = document.getElementById('canvas'),
+		    ctx             = canv.getContext('2d'),
+		    isMouseDown     = false,
+		    coordinates     = [],
+		    color           = 'black',
+		    lineAndRadWidth = document.getElementById('widthLine').value;
+
+		//change tool//
+		function changePan() {
+			color = 'black';
+			document.querySelector('.main__color').style.backgroundColor = color;
+			if(!document.getElementById('pan').classList.contains('selected')) {
+				document.getElementById('pan').classList.add('selected');
+				if(document.getElementById('eraser').classList.contains('selected')) {
+					document.getElementById('eraser').classList.remove('selected');
+				}
+			}
+		}
+
+		function changeEraser() {
+			color = 'white';
+			document.querySelector('.main__color').style.backgroundColor = color;
+			if(!document.getElementById('eraser').classList.contains('selected')) {
+				document.getElementById('eraser').classList.add('selected');
+				if(document.getElementById('pan').classList.contains('selected')) {
+					document.getElementById('pan').classList.remove('selected');
+				}
+			}
+		}
+
+		//change colors//
+		document.querySelector('.main__color').style.backgroundColor = color;
+
+		function changeColor(count) {
+			if (!document.getElementById('eraser').classList.contains('selected')) {
+				color = document.getElementsByClassName('color__cell')[count].style.backgroundColor;
+				document.querySelector('.main__color').style.backgroundColor = color;
+			} else {
+				color = 'white';
+			}
+		}
 
 		//canvas size//
 		canv.width  = window.innerWidth;
@@ -34,26 +314,32 @@
 		//CODE//
 		canv.addEventListener('mousedown', function() {
 			isMouseDown = true;
+			lineAndRadWidth = document.getElementById('widthLine').value;
 		});
 
 		canv.addEventListener('mouseup', function() {
 			isMouseDown = false;
 			ctx.beginPath();
-			coordinates.push('mouseup')
+			coordinates.push('stop');
 		});
-
-		ctx.lineWidth = 6*2;
 
 		canv.addEventListener('mousemove', function(e) {
 			if(isMouseDown) {
-				coordinates.push([e.clientX, e.clientY]);
+				lineAndRadWidth = document.getElementById('widthLine').value;
+				ctx.fillStyle = color;
+
+				ctx.lineWidth = lineAndRadWidth;
+				coordinates.push([e.clientX, e.clientY, color, lineAndRadWidth]);
 
 				ctx.lineTo(e.clientX, e.clientY);
 				ctx.stroke();
+				ctx.strokeStyle = color;
 
-				ctx.beginPath();
-				ctx.arc(e.clientX, e.clientY, 6, 0, Math.PI * 2);
-				ctx.fill();
+				if(lineAndRadWidth > 1) {
+					ctx.beginPath();
+					ctx.arc(e.clientX, e.clientY, lineAndRadWidth / 2, 0, Math.PI * 2);
+					ctx.fill();
+				}
 
 				ctx.beginPath();
 				ctx.moveTo(e.clientX, e.clientY);
@@ -75,14 +361,19 @@
 				}
 
 				let coord = coordinates.shift(), 
-			        e     = {clientX: coord["0"],clientY: coord["1"]};
+			        e     = {clientX: coord["0"], clientY: coord["1"], color: coord["2"], LARWidth: coord["3"]};
 
+			    ctx.fillStyle = e.color;
+			    ctx.lineWidth = e.LARWidth;
 				ctx.lineTo(e.clientX, e.clientY);
 				ctx.stroke();
+				ctx.strokeStyle = e.color;
 
-				ctx.beginPath();
-				ctx.arc(e.clientX, e.clientY, 6, 0, Math.PI * 2);
-				ctx.fill();
+				if(lineAndRadWidth > 1) {
+					ctx.beginPath();
+					ctx.arc(e.clientX, e.clientY, lineAndRadWidth / 2, 0, Math.PI * 2);
+					ctx.fill();
+				}
 
 				ctx.beginPath();
 				ctx.moveTo(e.clientX, e.clientY);
@@ -91,45 +382,46 @@
 
 		//clear function//
 		function clear() {
-			ctx.fillStyle = 'white';
-			ctx.fillRect(0, 0, canv.width, canv.height);
-
+			ctx.clearRect(0, 0, canv.width, canv.height);
 			ctx.beginPath();
-			ctx.fillStyle = 'black';
 		}
 
+		//clear localStorage function//
+		function clearSaved() {
+			localStorage.removeItem('coordinates', JSON.stringify(coordinates));
+			localStorage.setItem('coordinates', JSON.stringify(coordinates));
+			console.log('LocalStorage cleared');
+		}
 
-		//s - save, r - replay, c - clear//
-		document.addEventListener('keydown', function (e) {
-			//save//
-			if(e.keyCode === 83) {
-				save();
-				console.log('Saved');
-			}
+		document.getElementById('clear').onclick = function() {
+			clear();
+			console.log('Cleared!');
+		}
 
-			//replay//
-			if(e.keyCode === 82) {
-				console.log('Replaying...');
+		document.getElementById('clearAll').onclick = function() {
+			clearSaved();
+		}
 
-				coordinates = JSON.parse(localStorage.getItem('coordinates'));
+		document.getElementById('save').onclick = function() {
+			save();
+			console.log('Saved!');
+		}
 
-				clear();
-				replay();
-			}
+		function DownloadCanvas() {
+			let URI = canvas.toDataURL('image/png');
+			this.href = URI;
+		};
 
-			//clear//
-			if(e.keyCode === 67) {
-				clear();
-				console.log('Cleared');
-			}
+		document.getElementById("download").addEventListener('click', DownloadCanvas, false);
 
-			//clear localStorage//
-			if(e.keyCode === 65) {
-				localStorage.removeItem('coordinates', JSON.stringify(coordinates));
-				localStorage.setItem('coordinates', JSON.stringify(coordinates));
-				console.log('LocalStorage cleared');
-			}
-		});
+		document.getElementById('replay').onclick = function() {
+			console.log('Replaying...');
+
+			coordinates = JSON.parse(localStorage.getItem('coordinates'));
+
+			clear();
+			replay();
+		}
 	</script>
 </body>
 </html>
