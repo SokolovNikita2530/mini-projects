@@ -18,6 +18,40 @@
 		* {box-sizing: border-box;}
 		canvas {display: block;}
 
+		#preloader {
+			background-color: #fff;
+			position: absolute;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			width: 100vw;
+			transition: .5s;
+			z-index: 999;
+		}
+
+		#preloader .img {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 320px;
+			height: 320px;
+			border: 6px solid #000;
+			border-radius: 50%;
+			background-color: #fff;
+			box-shadow: 0 0 10px #999;
+		}
+
+		#preloader .img img {
+			width: 180px;
+			height: 180px;
+		}
+
+		#preloader h1 {
+			text-align: center;
+			margin-top: 40px;
+		}
+
 		.panel {
 			border-bottom: 1px solid #999;
 			border-left: 1px solid #999;
@@ -204,12 +238,21 @@
 	</style>
 </head>
 <body>
+	<!-- preloader -->
+	<div id="preloader">
+		<div>
+			<div class="img animate__animated animate__rotateIn">
+				<img src="ICO.png" alt="">
+			</div>
+			<h1 class="animate__animated animate__fadeInUp">MINI PAINT</h1>
+		</div>
+	</div>
 	<!-- panel -->
 	<div class='panel'>
 		<div class="tools">
 			<div class="select">
-				<div id="eraser" class='mini-icon' onclick="changeEraser()"><img src="./images/clear.png" alt=""></div>
-				<div id="pan" class='mini-icon selected' style="margin: 0;" onclick="changePan()"><img src="./images/pan.png" alt=""></div>
+				<div id="eraser" class='mini-icon' onclick="changeEraser()"><img src="images/clear.png" alt=""></div>
+				<div id="pan" class='mini-icon selected' style="margin: 0;" onclick="changePan()"><img src="images/pan.png" alt=""></div>
 			</div>
 			<p>Tools</p>
 		</div>
@@ -261,6 +304,16 @@
 
 	<!-- script -->
 	<script type="text/javascript">
+		//preloader//
+		window.onload = function() {
+			function PRELOADER() {
+				let pre = document.getElementById('preloader');
+				pre.style.visibility = 'hidden';
+				pre.style.opacity    = 0;
+			}
+			setTimeout(PRELOADER, 2000);
+		}
+
 		//variables//
 		let canv            = document.getElementById('canvas'),
 		    ctx             = canv.getContext('2d'),
