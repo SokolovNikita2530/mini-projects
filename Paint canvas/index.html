@@ -68,7 +68,6 @@
 		.panel {
 			border-bottom: 1px solid #999;
 			border-left: 1px solid #999;
-
 			display: flex;
 			align-items: center;
 			position: absolute;
@@ -79,13 +78,13 @@
 		}
 
 		.tools {
-			width: 20%;
+			width: 15%;
 			height: 100%;
 			border-right: 1px solid #999;
 		}
 
 		.thickness {
-			width: 20%;
+			width: 15%;
 			height: 100%;
 			border-right: 1px solid #999;
 		}
@@ -96,7 +95,11 @@
 			border-right: 1px solid #999;
 		}
 
-
+		.speed {
+			width: 15%;
+			height: 100%;
+			border-right: 1px solid #999;
+		}
 
 		.tools, .thickness, .colors, .buttons {
 			display: inline-block;
@@ -211,9 +214,17 @@
 			border-color: rgba(100,100,255,1);
 		}
 
+		.speed div {
+			height: 80%;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
 		.buttons {
 			height: 100%;
-			width: 30%;
+			width: 25%;
 		}
 
 		.main_buttons {
@@ -235,7 +246,7 @@
 			color: #555;
 		}
 		
-		.download button{
+		.download button {
 			outline: none;
 			height: 30px !important;
 			border-top: 1px solid #999 !important;
@@ -249,6 +260,47 @@
 
 		a {
 			color: #555 !important;
+		}
+
+		input[type=range] {
+			width: 80%;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			outline: none;
+			overflow: hidden;
+			-moz-transform: scaleX(-1);
+			-o-transform: scaleX(-1);
+			-webkit-transform: scaleX(-1);
+			transform: scaleX(-1);
+		}
+
+		input[type=range]::-webkit-slider-runnable-track {
+			background-color: rgba(100,100,255,0.5);
+		}
+
+		input[type=range]::-webkit-slider-thumb {
+			background: rgba(100,100,255,0.9);
+			cursor: pointer;
+			width: 5px;
+			margin-top: -40px;
+			height: 150px;
+			-webkit-appearance: none;
+			box-shadow: -200px 0 0 200px #eee;
+		}
+
+		input[type=range]::-moz-range-track {
+			height: 8px;
+			background-color: rgba(100,100,255,0.5);
+		}
+
+		input[type=range]::-moz-range-thumb {
+			background: rgba(100,100,255,0.9);
+			cursor: pointer;
+			width: 5px;
+			margin-top: -40px;
+			height: 150px;
+			box-shadow: -200px 0 0 200px #eee;
 		}
 	</style>
 </head>
@@ -318,6 +370,12 @@
 			</div>
 			<p>Colors</p>
 		</div>
+		<div class="speed">
+			<div> 
+				<input type="range" min="1" max="50" id="speed" value="2">
+			</div>
+			<p>Replaying speed</p>
+		</div>
 		<div class="buttons">
 			<div class="main_buttons"><button id="clear">clear all</button><button id="clearAll">clear saved</button></div>
 			<div class="main_buttons" style="border-top: 1px solid #999;"><button id="save">save</button><button id="replay">replay</button></div>
@@ -357,8 +415,8 @@
 		    color           = 'black',
 		    currentTool     = null,
 		    turnOnOff       = [],
-		    count           = baseCount = 10,
-		    lineAndRadWidth = document.getElementById('widthLine').value;
+		    speed           = Number(document.getElementById('speed').value),
+		    lineAndRadWidth = Number(document.getElementById('widthLine').value);
 
 		//change tool//
 		function changePan() {
@@ -425,7 +483,7 @@
 				currentTool = 'eraser';
 			}
 			if(isMouseDown) {
-				lineAndRadWidth = document.getElementById('widthLine').value;
+				lineAndRadWidth = Number(document.getElementById('widthLine').value);
 				ctx.fillStyle = color;
 
 				ctx.lineWidth = lineAndRadWidth;
@@ -467,7 +525,6 @@
 							ctx.beginPath();
 							return;
 						}
-						count = baseCount;
 
 						let coord = coordinates.shift(), 
 						    e     = {clientX: coord["0"], clientY: coord["1"], color: coord["2"], LARWidth: coord["3"], eraser: coord["5"], tool: coord["4"]};
@@ -489,10 +546,14 @@
 						ctx.beginPath();
 						ctx.moveTo(e.clientX, e.clientY);
 				} else if(newPath === false) {
-					count = 0;
 					ctx.beginPath();
 				}
-			}, count);
+			}, Number(document.getElementById('speed').value));
+			if(!turnOnOff.length || !coordinates.length) {
+				clearInterval(timer);
+				ctx.beginPath();
+				return;
+			}
 		}
 
 		//clear function//
