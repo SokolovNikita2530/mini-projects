@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<style>
 		/*some styles*/
-		body {margin: 0 auto; user-select: none;}
+		body {margin: 0 auto; user-select: none; overflow: hidden !important;}
 		* {box-sizing: border-box;}
 		canvas {display: block;}
 
@@ -26,8 +26,9 @@
 			align-items: center;
 			height: 100vh;
 			width: 100vw;
-			transition: .5s;
+			transition: .3s;
 			z-index: 999;
+			overflow: hidden !important;
 		}
 
 		#preloader .img {
@@ -40,6 +41,7 @@
 			border-radius: 50%;
 			background-color: #fff;
 			box-shadow: 0 0 10px #999;
+			animation-duration: 1.5s;
 		}
 
 		#preloader .img img {
@@ -50,6 +52,18 @@
 		#preloader h1 {
 			text-align: center;
 			margin-top: 40px;
+		}
+
+		.preloder__item {
+			opacity: 0;
+			display: inline-block;
+			margin: 0 -5.5px;	
+			animation-duration: 1.3s;
+		}
+
+		.space {
+			margin: 0;
+			display: inline-block;
 		}
 
 		.panel {
@@ -246,7 +260,18 @@
 			<div class="img animate__animated animate__rotateIn">
 				<img src="ICO.png" alt="">
 			</div>
-			<h1 class="animate__animated animate__fadeInUp">MINI PAINT</h1>
+			<h1 style="color: #000 !important;">
+				<span class="preloder__item">M</span>
+				<span class="preloder__item">I</span>
+				<span class="preloder__item">N</span>
+				<span class="preloder__item">I</span>
+				<span class="space"></span>
+				<span class="preloder__item">P</span>
+				<span class="preloder__item">A</span>
+				<span class="preloder__item">I</span>
+				<span class="preloder__item">N</span>
+				<span class="preloder__item">T</span>
+			</h1>
 		</div>
 	</div>
 	<!-- panel -->
@@ -267,35 +292,35 @@
 				<div class="main__color"></div>
 				<div class="colors__container">
 					<div class="main__colors">
-						<div class="color__cell" style="background-color: black;" onclick="changeColor(0)"></div>
-						<div class="color__cell" style="background-color: gray;" onclick="changeColor(1)"></div>
-						<div class="color__cell" style="background-color: darkred;" onclick="changeColor(2)"></div>
-						<div class="color__cell" style="background-color: red;" onclick="changeColor(3)"></div>
-						<div class="color__cell" style="background-color: orange;" onclick="changeColor(4)"></div>
-						<div class="color__cell" style="background-color: yellow;" onclick="changeColor(5)"></div>
-						<div class="color__cell" style="background-color: green;" onclick="changeColor(6)"></div>
-						<div class="color__cell" style="background-color: dodgerblue;" onclick="changeColor(7)"></div>
-						<div class="color__cell" style="background-color: darkblue;" onclick="changeColor(8)"></div>
-						<div class="color__cell" style="background-color: indigo;" onclick="changeColor(9)"></div>
+						<div class="color__item" style="background-color: black;" onclick="changeColor(0)"></div>
+						<div class="color__item" style="background-color: gray;" onclick="changeColor(1)"></div>
+						<div class="color__item" style="background-color: darkred;" onclick="changeColor(2)"></div>
+						<div class="color__item" style="background-color: red;" onclick="changeColor(3)"></div>
+						<div class="color__item" style="background-color: orange;" onclick="changeColor(4)"></div>
+						<div class="color__item" style="background-color: yellow;" onclick="changeColor(5)"></div>
+						<div class="color__item" style="background-color: green;" onclick="changeColor(6)"></div>
+						<div class="color__item" style="background-color: dodgerblue;" onclick="changeColor(7)"></div>
+						<div class="color__item" style="background-color: darkblue;" onclick="changeColor(8)"></div>
+						<div class="color__item" style="background-color: indigo;" onclick="changeColor(9)"></div>
 					</div>
 					<div class="main__colors" style="margin-bottom: 0;">
-						<div class="color__cell" style="background-color: white;" onclick="changeColor(10)"></div>
-						<div class="color__cell" style="background-color: silver;" onclick="changeColor(11)"></div>
-						<div class="color__cell" style="background-color: brown;" onclick="changeColor(12)"></div>
-						<div class="color__cell" style="background-color: violet;" onclick="changeColor(13)"></div>
-						<div class="color__cell" style="background-color: gold;" onclick="changeColor(14)"></div>
-						<div class="color__cell" style="background-color: lightyellow;" onclick="changeColor(15)"></div>
-						<div class="color__cell" style="background-color: lime;" onclick="changeColor(16)"></div>
-						<div class="color__cell" style="background-color: skyblue;" onclick="changeColor(17)"></div>
-						<div class="color__cell" style="background-color: steelblue;" onclick="changeColor(18)"></div>
-						<div class="color__cell" style="background-color: purple;" onclick="changeColor(19)"></div>
+						<div class="color__item" style="background-color: white;" onclick="changeColor(10)"></div>
+						<div class="color__item" style="background-color: silver;" onclick="changeColor(11)"></div>
+						<div class="color__item" style="background-color: brown;" onclick="changeColor(12)"></div>
+						<div class="color__item" style="background-color: violet;" onclick="changeColor(13)"></div>
+						<div class="color__item" style="background-color: gold;" onclick="changeColor(14)"></div>
+						<div class="color__item" style="background-color: lightyellow;" onclick="changeColor(15)"></div>
+						<div class="color__item" style="background-color: lime;" onclick="changeColor(16)"></div>
+						<div class="color__item" style="background-color: skyblue;" onclick="changeColor(17)"></div>
+						<div class="color__item" style="background-color: steelblue;" onclick="changeColor(18)"></div>
+						<div class="color__item" style="background-color: purple;" onclick="changeColor(19)"></div>
 					</div>
 				</div>
 			</div>
 			<p>Colors</p>
 		</div>
 		<div class="buttons">
-			<div class="main_buttons"><button id="clear">clear</button><button id="clearAll">clear saved</button></div>
+			<div class="main_buttons"><button id="clear">clear all</button><button id="clearAll">clear saved</button></div>
 			<div class="main_buttons" style="border-top: 1px solid #999;"><button id="save">save</button><button id="replay">replay</button></div>
 			<div class="download"><button><a id="download" download="canvas.png">download picture</a></button></div>
 		</div>
@@ -308,12 +333,21 @@
 	<script type="text/javascript">
 		//preloader//
 		window.onload = function() {
+			let items = document.getElementsByClassName('preloder__item');
+			for(let index = 0; index < items.length; index++) {
+				function AnimateItems() {
+					items[index].classList.add('animate__animated', 'animate__fadeInUpBig');
+					items[index].style.opacity = 1;
+				}
+				setTimeout(AnimateItems, index * 80);
+			}
+
 			function PRELOADER() {
 				let pre = document.getElementById('preloader');
 				pre.style.visibility = 'hidden';
 				pre.style.opacity    = 0;
 			}
-			setTimeout(PRELOADER, 2000);
+			setTimeout(PRELOADER, 2500);
 		}
 
 		//variables//
@@ -322,6 +356,8 @@
 		    isMouseDown     = false,
 		    coordinates     = [],
 		    color           = 'black',
+		    currentTool     = null,
+		    turnOnOff       = [],
 		    lineAndRadWidth = document.getElementById('widthLine').value;
 
 		//change tool//
@@ -352,10 +388,10 @@
 
 		function changeColor(count) {
 			if (!document.getElementById('eraser').classList.contains('selected')) {
-				color = document.getElementsByClassName('color__cell')[count].style.backgroundColor;
+				color = document.getElementsByClassName('color__item')[count].style.backgroundColor;
 				document.querySelector('.main__color').style.backgroundColor = color;
 			} else {
-				color = 'white';
+				
 			}
 		}
 
@@ -372,16 +408,28 @@
 		canv.addEventListener('mouseup', function() {
 			isMouseDown = false;
 			ctx.beginPath();
-			coordinates.push('stop');
 		});
 
 		canv.addEventListener('mousemove', function(e) {
+			if(isMouseDown) {
+				turnOnOff.push(true);
+			}
+			if(!isMouseDown) {
+				turnOnOff.push(false);
+			}
+			if(!document.getElementById('eraser').classList.contains('selected')) {
+				ctx.globalCompositeOperation = 'source-over';
+				currentTool = 'pan';
+			} else if(document.getElementById('eraser').classList.contains('selected')){
+				ctx.globalCompositeOperation = 'destination-out';
+				currentTool = 'eraser';
+			}
 			if(isMouseDown) {
 				lineAndRadWidth = document.getElementById('widthLine').value;
 				ctx.fillStyle = color;
 
 				ctx.lineWidth = lineAndRadWidth;
-				coordinates.push([e.clientX, e.clientY, color, lineAndRadWidth]);
+				coordinates.push([e.clientX, e.clientY, color, lineAndRadWidth, currentTool, ctx.globalCompositeOperation]);
 
 				ctx.lineTo(e.clientX, e.clientY);
 				ctx.stroke();
@@ -400,46 +448,64 @@
 
 		//save function//
 		function save() {
-			localStorage.setItem('coordinates', JSON.stringify(coordinates))
+			localStorage.setItem('turnOnOff', JSON.stringify(turnOnOff));
+			localStorage.setItem('coordinates', JSON.stringify(coordinates));
 		}
 
 		//replay function//
 		function replay() {
 			let timer = setInterval(function() {
-				if(!coordinates.length) {
+				let newPath = turnOnOff.shift();
+				if(!turnOnOff.length) {
 					clearInterval(timer);
 					ctx.beginPath();
 					return;
 				}
+				if(newPath === true) {
+						if(!coordinates.length) {
+							clearInterval(timer);
+							ctx.beginPath();
+							return;
+						}
 
-				let coord = coordinates.shift(), 
-			       e     = {clientX: coord["0"], clientY: coord["1"], color: coord["2"], LARWidth: coord["3"]};
+						let coord = coordinates.shift(), 
+						    e     = {clientX: coord["0"], clientY: coord["1"], color: coord["2"], LARWidth: coord["3"], eraser: coord["5"], tool: coord["4"]};
 
-			   ctx.fillStyle = e.color;
-			   ctx.lineWidth = e.LARWidth;
-				ctx.lineTo(e.clientX, e.clientY);
-				ctx.stroke();
-				ctx.strokeStyle = e.color;
+						ctx.fillStyle = e.color;
+						ctx.globalCompositeOperation = e.eraser;
+						document.getElementById(e.tool).click();
+						ctx.lineWidth = e.LARWidth;
+						ctx.lineTo(e.clientX, e.clientY);
+						ctx.stroke();
+						ctx.strokeStyle = e.color;
 
-				if(lineAndRadWidth > 1) {
+						if(lineAndRadWidth > 1) {
+							ctx.beginPath();
+							ctx.arc(e.clientX, e.clientY, e.LARWidth / 2, 0, Math.PI * 2);
+							ctx.fill();
+						}
+
+						ctx.beginPath();
+						ctx.moveTo(e.clientX, e.clientY);
+				} else if(newPath === false) {
 					ctx.beginPath();
-					ctx.arc(e.clientX, e.clientY, e.LARWidth / 2, 0, Math.PI * 2);
-					ctx.fill();
 				}
-
-				ctx.beginPath();
-				ctx.moveTo(e.clientX, e.clientY);
-			}, 20);
+			}, 10);
 		}
 
 		//clear function//
 		function clear() {
+			turnOnOff = [];
 			ctx.clearRect(0, 0, canv.width, canv.height);
 			ctx.beginPath();
 		}
 
 		//clear localStorage function//
 		function clearSaved() {
+			turnOnOff = [];
+			coordinates = [];
+			localStorage.removeItem('turnOnOff', JSON.stringify(turnOnOff));
+			localStorage.setItem('turnOnOff', JSON.stringify(turnOnOff));
 			localStorage.removeItem('coordinates', JSON.stringify(coordinates));
 			localStorage.setItem('coordinates', JSON.stringify(coordinates));
 			console.log('LocalStorage cleared');
@@ -468,10 +534,10 @@
 
 		document.getElementById('replay').onclick = function() {
 			console.log('Replaying...');
-
+			turnOnOff   = JSON.parse(localStorage.getItem('turnOnOff'));
 			coordinates = JSON.parse(localStorage.getItem('coordinates'));
-
-			clear();
+			ctx.clearRect(0, 0, canv.width, canv.height);
+			ctx.beginPath();
 			replay();
 		}
 	</script>
