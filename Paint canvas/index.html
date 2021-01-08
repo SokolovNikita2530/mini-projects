@@ -40,7 +40,6 @@
 			border: 6px solid #000;
 			border-radius: 50%;
 			background-color: #fff;
-			box-shadow: 0 0 10px #999;
 			animation-duration: 1.5s;
 		}
 
@@ -358,6 +357,7 @@
 		    color           = 'black',
 		    currentTool     = null,
 		    turnOnOff       = [],
+		    count           = baseCount = 10,
 		    lineAndRadWidth = document.getElementById('widthLine').value;
 
 		//change tool//
@@ -455,18 +455,19 @@
 		//replay function//
 		function replay() {
 			let timer = setInterval(function() {
-				let newPath = turnOnOff.shift();
 				if(!turnOnOff.length) {
 					clearInterval(timer);
 					ctx.beginPath();
 					return;
 				}
+				let newPath = turnOnOff.shift();
 				if(newPath === true) {
 						if(!coordinates.length) {
 							clearInterval(timer);
 							ctx.beginPath();
 							return;
 						}
+						count = baseCount;
 
 						let coord = coordinates.shift(), 
 						    e     = {clientX: coord["0"], clientY: coord["1"], color: coord["2"], LARWidth: coord["3"], eraser: coord["5"], tool: coord["4"]};
@@ -488,9 +489,10 @@
 						ctx.beginPath();
 						ctx.moveTo(e.clientX, e.clientY);
 				} else if(newPath === false) {
+					count = 0;
 					ctx.beginPath();
 				}
-			}, 10);
+			}, count);
 		}
 
 		//clear function//
