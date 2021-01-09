@@ -71,7 +71,7 @@
 			display: flex;
 			align-items: center;
 			position: absolute;
-			height: 90px;
+			height: 99px;
 			width: 100vw;
 			background-color: #eee;
 			padding: 0px;
@@ -142,7 +142,7 @@
 			display: block !important;
 			color: #999;
 			text-align: center;
-			margin-top: -7px;
+			margin-top: -4px;
 			font-family: Verdana;
 			margin-bottom: 0 !important;
 		}
@@ -203,14 +203,16 @@
 			margin-bottom: 5px;
 		}
 
-		.main__colors div {
+		.main__colors div, .main__colors input{
+			white-space: nowrap;
+			margin: 0;
 			height: 20px;
 			width: 20px;
 			display: inline-block;
 			border: 2px solid #ddd;
 		}
 
-		.main__colors div:hover {
+		.main__colors div:hover, .main__colors input:hover{
 			border-color: rgba(100,100,255,1);
 		}
 
@@ -232,12 +234,12 @@
 			width: 100%;
 			justify-content: center;
 			align-items: center;
-			height: 30px;
+			height: 33px;
 		}
 
 		.main_buttons button {
 			outline: none;
-			height: 30px;
+			height: 33px;
 			text-transform: uppercase;
 			border: none;
 			width: 50%;
@@ -248,7 +250,7 @@
 		
 		.download button {
 			outline: none;
-			height: 30px !important;
+			height: 33px !important;
 			border-top: 1px solid #999 !important;
 			border-right: 1px solid #999 !important;
 			border-bottom: 1px solid #999 !important;
@@ -263,6 +265,7 @@
 		}
 
 		input[type=range] {
+			margin: 0px !important;
 			width: 80%;
 			-webkit-appearance: none;
 			-moz-appearance: none;
@@ -302,6 +305,29 @@
 			height: 150px;
 			box-shadow: -200px 0 0 200px #eee;
 		}
+
+		input[type="color"] {
+			display: inline-block;
+			justify-content: center;
+			align-items: center;
+			-webkit-appearance: none;
+			background: #fff;
+			padding: 0;
+			overflow: hidden;
+			outline: none;
+			cursor: inherit;
+			background-color: transparent;
+		}	
+
+		input[type="color"]::-webkit-color-swatch-wrapper {
+			padding: 0;
+			background-color: transparent;
+		}
+
+		input[type="color"]::-webkit-color-swatch {
+			border: none;
+			background-color: transparent;
+		}
 	</style>
 </head>
 <body>
@@ -340,31 +366,31 @@
 		</div>
 		<div class="colors">
 			<div class="color-box">
-				<div class="main__color"></div>
+				<div class="main__color" id="main__color"></div>
 				<div class="colors__container">
 					<div class="main__colors">
 						<div class="color__item" style="background-color: black;" onclick="changeColor(0)"></div>
 						<div class="color__item" style="background-color: gray;" onclick="changeColor(1)"></div>
-						<div class="color__item" style="background-color: darkred;" onclick="changeColor(2)"></div>
-						<div class="color__item" style="background-color: red;" onclick="changeColor(3)"></div>
+						<div class="color__item" style="background-color: silver;" onclick="changeColor(2)"></div>
+						<div class="color__item" style="background-color: yellow;" onclick="changeColor(3)"></div>
 						<div class="color__item" style="background-color: orange;" onclick="changeColor(4)"></div>
-						<div class="color__item" style="background-color: yellow;" onclick="changeColor(5)"></div>
-						<div class="color__item" style="background-color: green;" onclick="changeColor(6)"></div>
-						<div class="color__item" style="background-color: dodgerblue;" onclick="changeColor(7)"></div>
-						<div class="color__item" style="background-color: darkblue;" onclick="changeColor(8)"></div>
-						<div class="color__item" style="background-color: indigo;" onclick="changeColor(9)"></div>
+						<div class="color__item" style="background-color: red;" onclick="changeColor(5)"></div>
+						<div class="color__item" style="background-color: purple;" onclick="changeColor(6)"></div>
+						<div class="color__item" style="background-color: skyblue;" onclick="changeColor(7)"></div>
+						<div class="color__item" style="background-color: blue;" onclick="changeColor(8)"></div>
+						<div class="color__item" style="background-color: darkblue;" onclick="changeColor(9)"></div>
 					</div>
 					<div class="main__colors" style="margin-bottom: 0;">
-						<div class="color__item" style="background-color: white;" onclick="changeColor(10)"></div>
-						<div class="color__item" style="background-color: silver;" onclick="changeColor(11)"></div>
+						<div class="color__item" style="background-color: green;" onclick="changeColor(10)"></div>
+						<div class="color__item" style="background-color: lime;" onclick="changeColor(11)"></div>
 						<div class="color__item" style="background-color: brown;" onclick="changeColor(12)"></div>
-						<div class="color__item" style="background-color: violet;" onclick="changeColor(13)"></div>
-						<div class="color__item" style="background-color: gold;" onclick="changeColor(14)"></div>
-						<div class="color__item" style="background-color: lightyellow;" onclick="changeColor(15)"></div>
-						<div class="color__item" style="background-color: lime;" onclick="changeColor(16)"></div>
-						<div class="color__item" style="background-color: skyblue;" onclick="changeColor(17)"></div>
-						<div class="color__item" style="background-color: steelblue;" onclick="changeColor(18)"></div>
-						<div class="color__item" style="background-color: purple;" onclick="changeColor(19)"></div>
+						<div class="color__item" style="background-color: white;" onclick="changeColor(13)"></div>
+						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(14)"></input>
+						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(15)"></input>
+						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(16)"></input>
+						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(17)"></input>
+						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(18)"></input>
+						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(19)"></input>
 					</div>
 				</div>
 			</div>
@@ -412,7 +438,7 @@
 		    ctx             = canv.getContext('2d'),
 		    isMouseDown     = false,
 		    coordinates     = [],
-		    color           = 'black',
+		    color           = localStorage.getItem('color') || 'black',
 		    currentTool     = null,
 		    turnOnOff       = [],
 		    speed           = Number(document.getElementById('speed').value),
@@ -420,7 +446,8 @@
 
 		//change tool//
 		function changePan() {
-			color = 'black';
+			color = localStorage.getItem('color') || 'black';
+			document.querySelector('.main__color').removeAttribute('style');
 			document.querySelector('.main__color').style.backgroundColor = color;
 			if(!document.getElementById('pan').classList.contains('selected')) {
 				document.getElementById('pan').classList.add('selected');
@@ -431,8 +458,8 @@
 		}
 
 		function changeEraser() {
-			color = 'white';
-			document.querySelector('.main__color').style.backgroundColor = color;
+			document.querySelector('.main__color').style.backgroundColor = "transparent";
+			document.querySelector('.main__color').style.backgroundImage = "repeating-linear-gradient(135deg,#555 0, #555 5px, transparent 5px, transparent 10px)"
 			if(!document.getElementById('eraser').classList.contains('selected')) {
 				document.getElementById('eraser').classList.add('selected');
 				if(document.getElementById('pan').classList.contains('selected')) {
@@ -446,16 +473,27 @@
 
 		function changeColor(count) {
 			if (!document.getElementById('eraser').classList.contains('selected')) {
-				color = document.getElementsByClassName('color__item')[count].style.backgroundColor;
+				if(count < 14) {
+					color = document.getElementsByClassName('color__item')[count].style.backgroundColor;
+				} else if(count > 13) {
+					color = document.getElementsByClassName('color__item')[count].value;
+				}
 				document.querySelector('.main__color').style.backgroundColor = color;
-			} else {
-				
+				localStorage.setItem('color', color);
+			} else if(document.getElementById('eraser').classList.contains('selected')) {
+				document.querySelector('.main__color').style.backgroundColor = "transparent";
+				document.querySelector('.main__color').style.backgroundImage = "repeating-linear-gradient(135deg,#555 0, #555 5px, transparent 5px, transparent 10px)"
 			}
 		}
 
 		//canvas size//
 		canv.width  = window.innerWidth;
 		canv.height = window.innerHeight;
+
+		document.addEventListener('resize', function() {
+			canv.width  = window.innerWidth;
+			canv.height = window.innerHeight;
+		});
 
 		//CODE//
 		canv.addEventListener('mousedown', function() {
@@ -532,7 +570,9 @@
 						ctx.fillStyle = e.color;
 						ctx.globalCompositeOperation = e.eraser;
 						document.getElementById(e.tool).click();
+						document.querySelector('.main__color').style.backgroundColor = e.color;
 						ctx.lineWidth = e.LARWidth;
+						document.getElementById('widthLine').value = e.LARWidth;
 						ctx.lineTo(e.clientX, e.clientY);
 						ctx.stroke();
 						ctx.strokeStyle = e.color;
