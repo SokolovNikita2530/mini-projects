@@ -385,12 +385,12 @@
 						<div class="color__item" style="background-color: lime;" onclick="changeColor(11)"></div>
 						<div class="color__item" style="background-color: brown;" onclick="changeColor(12)"></div>
 						<div class="color__item" style="background-color: white;" onclick="changeColor(13)"></div>
-						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(14)"></input>
-						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(15)"></input>
-						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(16)"></input>
-						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(17)"></input>
-						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(18)"></input>
-						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(19)"></input>
+						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(14)" disabled="true"></input>
+						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(15)" disabled="true"></input>
+						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(16)" disabled="true"></input>
+						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(17)" disabled="true"></input>
+						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(18)" disabled="true"></input>
+						<input value="#eeeeee" type="color" class="color__item" style="background-color: transparent;" oninput="changeColor(19)" disabled="true"></input>
 					</div>
 				</div>
 			</div>
@@ -471,6 +471,34 @@
 		//change colors//
 		document.querySelector('.main__color').style.backgroundColor = color;
 
+		let timeoutId;
+
+		document.onclick = function (e) {
+			for(let i = 14; i <= 19; i++) {
+				if(e.target === document.getElementsByClassName('color__item')[i]) {
+					timeoutId = setTimeout(function() {
+						clearTimeout(timeoutId);
+						color = document.getElementsByClassName('color__item')[i].value;
+						document.querySelector('.main__color').style.backgroundColor = color;
+					}, 150);
+				} else {
+					document.getElementsByClassName('color__item')[i].setAttribute('disabled', 'true');
+					timeoutId = 0;
+				}
+			} 
+		}
+
+		document.ondblclick = function(e) {
+			for(let i = 14; i <= 19; i++) {
+				if(e.target === document.getElementsByClassName('color__item')[i]) {
+					clearTimeout(timeoutId);
+					document.getElementsByClassName('color__item')[i].removeAttribute('disabled');
+					document.getElementsByClassName('color__item')[i].click();
+					timeoutId = 0;
+				}
+			}
+		}
+
 		function changeColor(count) {
 			if (!document.getElementById('eraser').classList.contains('selected')) {
 				if(count < 14) {
@@ -479,6 +507,9 @@
 					color = document.getElementsByClassName('color__item')[count].value;
 				}
 				document.querySelector('.main__color').style.backgroundColor = color;
+				if(localStorage.getItem('color')) {
+					localStorage.removeItem('color', color);
+				}
 				localStorage.setItem('color', color);
 			} else if(document.getElementById('eraser').classList.contains('selected')) {
 				document.querySelector('.main__color').style.backgroundColor = "transparent";
@@ -486,16 +517,16 @@
 			}
 		}
 
-		//canvas size//
+		//set canvas size//
 		canv.width  = window.innerWidth;
 		canv.height = window.innerHeight;
 
-		document.addEventListener('resize', function() {
+		window.addEventListener('resize', function() {
 			canv.width  = window.innerWidth;
 			canv.height = window.innerHeight;
 		});
 
-		//CODE//
+		//render//
 		canv.addEventListener('mousedown', function() {
 			isMouseDown = true;
 			lineAndRadWidth = document.getElementById('widthLine').value;
@@ -550,6 +581,15 @@
 
 		//replay function//
 		function replay() {
+			let elCount = turnOnOff.shift();
+			for(let i = 0; i < turnOnOff.length; i++) {
+				if(turnOnOff[i] === false) {
+					turnOnOff.splice(i, 1);
+				} else if(turnOnOff[i] === true) {
+					break;
+				}
+			}
+				
 			let timer = setInterval(function() {
 				if(!turnOnOff.length) {
 					clearInterval(timer);
@@ -585,7 +625,7 @@
 
 						ctx.beginPath();
 						ctx.moveTo(e.clientX, e.clientY);
-				} else if(newPath === false) {
+				} else if (newPath === false) {
 					ctx.beginPath();
 				}
 			}, Number(document.getElementById('speed').value));
