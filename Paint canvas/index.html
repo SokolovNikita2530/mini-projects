@@ -606,10 +606,10 @@
 
 						let coord = coordinates.shift(), 
 						    e     = {clientX: coord["0"], clientY: coord["1"], color: coord["2"], LARWidth: coord["3"], eraser: coord["5"], tool: coord["4"]};
-
-						ctx.fillStyle = e.color;
+						
 						ctx.globalCompositeOperation = e.eraser;
 						document.getElementById(e.tool).click();
+						ctx.fillStyle = e.color;
 						document.querySelector('.main__color').style.backgroundColor = e.color;
 						ctx.lineWidth = e.LARWidth;
 						document.getElementById('widthLine').value = e.LARWidth;
